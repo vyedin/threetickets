@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Socket} from "phoenix";
+
+var sock = new Socket("ws://rog.home.tilmonedwards.com:4000/socket/user");
+sock.connect();
 
 function App() {
   return (
@@ -16,7 +20,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          blahh
         </a>
       </header>
     </div>
