@@ -1,23 +1,23 @@
 {
-    "candidates": [
-        {"name" : "Warren"},
-        {"name" : "Biden"},
-        {"name" : "Bernie"},
-        {"name" : "Harris"},
-        {"name" : "Booker"},
-        {"name" : "Buttigeig"},
-        {"name" : "Gabbard"},
-        {"name" : "Delaney"},
-        {"name" : "Castro"},
-        {"name" : "Gillibrand"},
-        {"name" : "O'Rourke"},
-        {"name" : "Klobouchar"},
-        {"name" : "Yang"},
-        {"name" : "Inslee"}
-    ],
-    "precincts": {
-        "adams1": {"name":"adams1","county":"Adams County","delegates":5},
-        "adams2": {"name":"adams2","county":"Adams County","delegates":1},
-        "adams3": {"name":"adams3","county":"Adams County","delegates":2}
-    }
+  "candidates": [
+    {"name" : "Warren"},
+    {"name" : "Biden"},
+    {"name" : "Bernie"},
+    {"name" : "Harris"},
+    {"name" : "Booker"},
+    {"name" : "Buttigeig"},
+    {"name" : "Gabbard"},
+    {"name" : "Delaney"},
+    {"name" : "Castro"},
+    {"name" : "Gillibrand"},
+    {"name" : "O'Rourke"},
+    {"name" : "Klobouchar"},
+    {"name" : "Yang"},
+    {"name" : "Inslee"}
+  ],
+  "precincts": {
+    "adams1": {"name":"adams1","county":"Adams County","delegates":5},
+    "adams2": {"name":"adams2","county":"Adams County","delegates":1},
+    "adams3": {"name":"adams3","county":"Adams County","delegates":2}
+  }
 }
