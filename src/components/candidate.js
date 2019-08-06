@@ -11,11 +11,11 @@ export default class Candidate extends React.Component {
 
 	render () {
 	  return (
-		<div className="calculate-delegates-per-candidate">
-			<p>"Elizabeth Warren"</p>
-			<InputNumber id="num-attendees-per-candidate" min={0} defaultValue={0} onChange={(evt) => this.props.func(Math.random())}/>
-			<p className="label-delegates">10 delegates</p>
-		</div>
+      <div className="calculate-delegates-per-candidate">
+        <p>"Elizabeth Warren"</p>
+        <InputNumber id="num-attendees-per-candidate" min={0} defaultValue={0} onChange={(evt) => this.props.func(Math.random())}/>
+        <p className="label-delegates">10 delegates</p>
+      </div>
 	  )
 	}
-  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Socket} from "phoenix";
+import {HashRouter as Router, Route} from 'react-router-dom'
+import Welcome from './components/welcome';
 import Viability from './components/viability';
 import Delegates from './components/delegates';
 
@@ -19,10 +21,13 @@ const precinct_id = new URL(window.location.href).searchParams.get("precinct_id"
 
 function App() {
   return (
-    <div className="App">
-      <Viability precinct_id={precinct_id}/>
-      <Delegates/>
-    </div>
+    <Router>
+      <div className="App">
+        <Route exact path="/" render={(props) => <Welcome {...props} precinct_id={precinct_id} />} />
+        <Route path="/viability" render={(props) => <Viability {...props} precinct_id={precinct_id} />} />
+        <Route path="/delegates" component={Delegates} />
+      </div>
+    </Router>
   );
 }
 
