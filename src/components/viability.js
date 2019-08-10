@@ -1,6 +1,5 @@
 import React from 'react';
 import {PageHeader, Form, Button, InputNumber} from 'antd';
-import {Socket} from "phoenix";
 import {calculateViabilityThreshold} from '../calculator.js';
 import Welcome from './welcome.js';
 
@@ -14,6 +13,7 @@ export default class Viability extends React.Component {
       formLayout: 'horizontal',
       precinct_id: props.precinct_id
     };
+    this.channel = props.channel;
   }
 
 	handleSubmit = e => {
@@ -29,10 +29,11 @@ export default class Viability extends React.Component {
 		const viability = calculateViabilityThreshold(totalAttendees,this.state.precinct_id);
 		this.setState({viability});
 
-		/*channel.push("new_msg", {body: viability}, 10000)
-		.receive("ok", (msg) => console.log("created message", msg) )
-		.receive("error", (reasons) => console.log("create failed", reasons) )
-		.receive("timeout", () => console.log("Networking issue...") )*/
+    this.channel.push("checkin", {
+      attendees: totalAttendees
+    });
+
+    this.goForward("/delegates");
   }
   
   goBack(){
@@ -61,7 +62,7 @@ export default class Viability extends React.Component {
             <InputNumber id="num-attendees" min={1} defaultValue={1} />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="form-submit" onClick={() => this.goForward("/delegates")}>Submit Check-In</Button>
+            <Button type="primary" htmlType="submit" className="form-submit" onClick={this.handleSubmit}>Submit Check-In</Button>
           </Form.Item>
             <Button type="primary" className="form-submit" onClick={() => this.goForward("/help")}>Get Help</Button>
         </Form>

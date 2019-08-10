@@ -11,6 +11,7 @@ export default class Delegates extends React.Component {
 		this.state = {
       delegates: 0
 		};
+    this.channel = props.channel;
   }
 
   goBack(){
