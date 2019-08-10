@@ -1,7 +1,6 @@
 import React from 'react';
 import {PageHeader, Form, Button, InputNumber} from 'antd';
 import {calculateViabilityThreshold} from '../calculator.js';
-import Welcome from './welcome.js';
 
 export default class Viability extends React.Component {
 
