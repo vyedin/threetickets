@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
 import {HashRouter as Router, Route} from 'react-router-dom'
+import socket from './socket';
 import Welcome from './components/welcome';
 import Viability from './components/viability';
 import Delegates from './components/delegates';
-<<<<<<< HEAD
-import socket from './socket';
-=======
 import Help from './components/help';
->>>>>>> keep adding routing, and add help page
 
 /*const sock = new Socket("ws://rog.home.tilmonedwards.com:4000/socket/user");
 sock.connect();
