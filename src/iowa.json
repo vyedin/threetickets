@@ -1,20 +1,25 @@
 {
-  "candidates": [
-    {"name" : "Warren"},
-    {"name" : "Biden"},
-    {"name" : "Bernie"},
-    {"name" : "Harris"},
-    {"name" : "Booker"},
-    {"name" : "Buttigeig"},
-    {"name" : "Gabbard"},
-    {"name" : "Delaney"},
-    {"name" : "Castro"},
-    {"name" : "Gillibrand"},
-    {"name" : "O'Rourke"},
-    {"name" : "Klobouchar"},
-    {"name" : "Yang"},
-    {"name" : "Inslee"}
+  "problems": [
+    {"description": "I can't find my location"},
+    {"description": "Location is locked"},
+    {"description": "Temporary chair not here"},
+    {"description": "Temporary chair not prepared"},
+    {"description": "Caucus starting late"},
+    {"description": "Other issue"}
   ],
+  "candidates": {
+    "Warren": {"name": "Warren"},
+    "Biden": {"name": "Biden"},
+    "Bernie": {"name": "Bernie"},
+    "Harris": {"name": "Harris"},
+    "Booker": {"name": "Booker"},
+    "Buttigeig": {"name": "Buttigeig"},
+    "Castro": {"name": "Castro"},
+    "O'Rourke": {"name": "O'Rourke"},
+    "Klobuchar": {"name": "Klobouchar"},
+    "Yang": {"name": "Yang"},
+    "Uncommitted": {"name": "Uncommitted"}
+  },
   "precincts": {
     "1593678": {
       "county": "LINN",

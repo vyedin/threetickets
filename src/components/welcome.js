@@ -1,14 +1,12 @@
 import React from 'react';
-import {PageHeader, Button} from 'antd';
+import {NavBar, Button} from 'antd-mobile';
 import staticData from '../iowa.json';
 
 export default class Welcome extends React.Component {
 
 	constructor(props) {
     super(props);
-		this.state = {
-      precinct_id: props.precinct_id
-		};
+    this.precinct_id = props.precinct_id;
   }
   
   goForward(path) {
@@ -18,11 +16,11 @@ export default class Welcome extends React.Component {
 	render () {
 	  return (
       <div>
-        <PageHeader onBack={() => null} title="Welcome" />
+        <NavBar mode="light">Welcome!</NavBar>
         <p>Hey, Captain!</p>
-        <p>The caucus in {staticData.precincts[this.state.precinct_id].van_prct_name}, {staticData.precincts[this.state.precinct_id].county} County, is on 02/03/20 at 6pm.</p>
-        <p><Button type="primary" className="form-submit" onClick={() => this.goForward("/viability")}>Start the Caucus</Button></p>
-        <p><Button type="primary" className="form-submit" onClick={() => this.goForward("/help")}>Get Help</Button></p>
+        <p>The caucus in {staticData.precincts[this.precinct_id].van_prct_name}, {staticData.precincts[this.precinct_id].county} County, is on 02/03/20 at 6pm.</p>
+        <Button type="primary" onClick={() => this.goForward("/checkin")}>Start the Caucus</Button>
+        <Button type="default" onClick={() => this.goForward("/help")}>Get Help</Button>
       </div>
 	  )
 	}

@@ -1,23 +1,14 @@
 import React from 'react';
-import {PageHeader, Button, List, Typography} from 'antd';
+import {NavBar, Button, Icon, List} from 'antd-mobile';
+import staticData from '../iowa.json';
 
-const helpOptions = [
-  "I can\'t find my location",
-  "Location is locked",
-  "Temporary chair not here",
-  "Temporary chair not prepared",
-  "Caucus starting late",
-  "Other issue"
-];
+const Item = List.Item;
 
 export default class Help extends React.Component {
 
 	constructor(props) {
     super(props);
-    this.goBack = this.goBack.bind(this);
-	  this.state = {
-      precinct_id: props.precinct_id
-	  };
+	  this.state = {};
   }
 
   goBack(){
@@ -31,14 +22,25 @@ export default class Help extends React.Component {
 	render () {
 	  return (
       <div>
-        <PageHeader onBack={this.goBack} title="Help" />
-        <List
-          size="large"
-          bordered
-          dataSource={helpOptions}
-          renderItem={item => <List.Item>{item}</List.Item>}
-        />
-        <p><Button type="primary" className="form-submit" href="tel:+1-408-832-3962">Call for Help</Button></p>
+        <NavBar
+          mode="light"
+          icon={<Icon type="left" />}
+          onLeftClick={() => this.goBack()}
+        >Help</NavBar>
+        <List>
+          {staticData.problems.map((problem,k) => {
+            return (  
+              <Item
+                key={k}
+                arrow="horizontal"
+                multipleLine
+                onClick={() => this.goForward({pathname: "/message", state: {problem: problem}})} 
+                platform="android"
+              >{problem.description}</Item>
+            )
+          })}
+        </List>
+        <Button type="primary" href="tel:+1-408-832-3962">Call for Help</Button>
       </div>
 	  )
 	}

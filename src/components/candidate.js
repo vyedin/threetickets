@@ -1,20 +1,26 @@
 import React from 'react';
-import {InputNumber} from 'antd';
+import {InputItem} from 'antd-mobile';
 
 export default class Candidate extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-		};
+    this.name = this.props.name;
 	}
+
+	onChange = (caucusers) => {
+    this.props.delegatesCallback(parseInt(caucusers));
+  }
 
 	render () {
 	  return (
-      <div className="calculate-delegates-per-candidate">
-        <p>"Elizabeth Warren"</p>
-        <InputNumber id="num-attendees-per-candidate" min={0} defaultValue={0} onChange={(evt) => this.props.func(Math.random())}/>
-        <p className="label-delegates">10 delegates</p>
+      <div>
+        <InputItem
+          type="number"
+          extra={this.props.delegates}
+          value={this.props.caucusers}
+          onChange={this.onChange}
+        >{this.name}</InputItem>
       </div>
 	  )
 	}
