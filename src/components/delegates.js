@@ -46,6 +46,10 @@ export default class Delegates extends React.Component {
     this.props.history.push(path);
   }
 
+  submitAlignment() {
+    this.props.channel.push("alignment", this.state);
+  }
+
   render () {
 	  return (
       <div>
@@ -70,7 +74,7 @@ export default class Delegates extends React.Component {
             )
           })}
         </List>
-        <Button type="primary" onClick={() => this.goForward("/")}>Submit Alignment</Button>
+        <Button type="primary" onClick={() => this.submitAlignment()}>Submit Alignment</Button>
         <Button type="default" onClick={() => this.goForward("/help")}>Get Help</Button>
       </div>
 	  )
