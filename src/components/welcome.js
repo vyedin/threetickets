@@ -12,7 +12,8 @@ export default class Welcome extends React.Component {
   goForward(path) {
     this.props.history.push(path);
   }
-
+  
+  // Few notes here: we'll have the date, time, and exact location in the json file when it's ready. The following is placeholder.
 	render () {
 	  return (
       <div>

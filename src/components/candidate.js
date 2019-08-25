@@ -9,14 +9,15 @@ export default class Candidate extends React.Component {
 	}
 
 	onChange = (caucusers) => {
-    this.props.delegatesCallback(parseInt(caucusers));
+    this.props.delegatesCallback(parseInt(caucusers) || 0);
   }
 
 	render () {
 	  return (
       <div>
         <InputItem
-          type="number"
+          type="digit"
+          defaultValue="0"
           extra={this.props.delegates}
           value={this.props.caucusers}
           onChange={this.onChange}

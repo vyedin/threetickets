@@ -12,8 +12,8 @@ import Message from './components/message';
 //prompt user for is, store in local storage, and re-render component and initialize the state off local storage
 const precinct_id = new URL(window.location.href).searchParams.get("precinct_id");
 
-let channel = socket.channel("caucus:" + precinct_id)
-channel.join()
+let channel = socket.channel("caucus:" + precinct_id);
+channel.join();
 
 function App() {
   return (
