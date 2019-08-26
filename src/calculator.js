@@ -17,6 +17,10 @@ export function calculateDelegates(totalAttendees, totalDelegates, caucusers) {
   return Math.round((caucusers * totalDelegates)/totalAttendees);
 }
 
+export function calculateSimpleMajority(candidates) {
+  return candidates;
+}
+
 export function resolveDelegates(candidates, totalDelegates) {
   // Ok, you got here because you allocated too many delegates. At this point, somebody has to lose a delegate. This can happen in a few ways:
   // - TAKE ONE OFF THE TOP: Technically the smallest group can't lose its only delegate, 

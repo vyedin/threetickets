@@ -2,7 +2,7 @@ import React from 'react';
 import Candidate from './candidate';
 import {NavBar, Icon, List, Button} from 'antd-mobile';
 import staticData from '../iowa.json';
-import {calculateViabilityThreshold, calculateDelegates, resolveDelegates} from '../calculator.js';
+import {calculateViabilityThreshold, calculateDelegates, resolveDelegates, calculateSimpleMajority} from '../calculator.js';
 
 const candidateIds = Object.keys(staticData.candidates);
 
@@ -19,7 +19,8 @@ export default class Delegates extends React.Component {
     };
 
     // These don't change:
-    this.totalDelegates = staticData.precincts[this.props.precinct_id].delegates;
+    this.precinct = parseInt(window.localStorage.getItem("precinct"));
+    this.totalDelegates = staticData.precincts[this.precinct].delegates;
     this.totalAttendees = parseInt(window.localStorage.getItem("totalAttendees"));
     this.viabilityThreshold = (this.totalDelegates > 1) ? calculateViabilityThreshold(this.totalAttendees, this.totalDelegates) : "simple majority";
   }
@@ -39,6 +40,11 @@ export default class Delegates extends React.Component {
       const delegates = (caucusers >= this.viabilityThreshold) ? calculateDelegates(this.totalAttendees, this.totalDelegates, caucusers) : 0;
       let candidates = this.state.candidates;
       candidates[candidateId] = {caucusers, delegates};
+
+      // Special case for 1-delegate precincts where we go with simple majority
+      if (this.totalDelegates === 1) {
+        candidates = calculateSimpleMajority(candidates);
+      }
       
       // EDGE CASES (TM):
       // - NO VIABLE CANDIDATES: the smallest groups realign until there are viable candidates. These instructions will be given, 

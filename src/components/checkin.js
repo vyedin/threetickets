@@ -42,7 +42,7 @@ export default class Checkin extends React.Component {
         <p>Let's start the check-in process. What is the official count of people at your caucus location today?</p>
         <List>
           <InputItem
-            type="number"
+            type="digit"
             clear="true"
             value={this.state.totalAttendees}
             onChange={this.onChange}

@@ -6,7 +6,6 @@ export default class Message extends React.Component {
 
 	constructor(props) {
     super(props);
-    this.state = {};
     this.problem = this.props.location.state.problem;
   }
 
