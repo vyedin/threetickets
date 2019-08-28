@@ -19,6 +19,7 @@ export default class Welcome extends React.Component {
   verifyLogin() {
     if(Object.keys(staticData.precincts).includes(this.state.code)) {
       window.localStorage.setItem("precinct", this.state.code);
+      this.props.connect(this.state.code);
       this.forceUpdate();
     } else {
       this.setState({error: true});
