@@ -1,5 +1,5 @@
 //CALCULATOR.JS LIBRARY
-import {max, min, filter, each, reduce, map, chain, extend} from 'underscore';
+import {max, min, filter, each, reduce, chain} from 'underscore';
 
 export function calculateViabilityThreshold(totalAttendees,totalDelegates) {
   switch(totalDelegates) {
@@ -52,7 +52,9 @@ export function resolveDelegates(candidates, totalDelegates) {
       each(candidatesWithMinority, (candidate) => candidate.delegates-- );
       console.log("took one from candidates with least caucusers");
     } else {
-      //Tie, resolved in UI
+      // Tie, resolved in UI
+      // For each viable candidate, if another candidate has the same number of caucusers, add that candidate's ID to the
+      // candidate.ties array. Now we know who is tied with whom!
       chain(viableCandidates)
       each(viableCandidates, function(candidate) {
         candidate.tie = chain(viableCandidates)
