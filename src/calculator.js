@@ -37,9 +37,15 @@ export function resolveDelegates(candidates, totalDelegates) {
     const viableCandidates = filter(candidates, function(candidate){ return (candidate.delegates > 0) });
     const candidatesWithMinority = multipleComp(min, viableCandidates, "caucusers");
 
-    if (candidatesWithMostDelegates.length === 1 && candidatesWithMostDelegates[0].delegates > 1) { // As long as the top group is not losing its only delegate, we can remove one.
+    // As long as the top group is not losing its only delegate, we can remove one
+    if (candidatesWithMostDelegates.length === 1 && candidatesWithMostDelegates[0].delegates > 1) { 
       candidatesWithMostDelegates[0].delegates--;
       console.log("took one from candidate with most delegates");
+    
+    // If the sum of all delegates allotted MINUS the delegates allotted to the viable candidate with the fewest
+    // caucusers is greater than or equal to the total delegates for the precinct, we can safely drop the delegates
+    // from the lowest performing candidate(s). This will drop the candidate with the least caucusers, and multiples
+    // if there is a tie (of 2 - n candidates)
     } else if ((reduce(candidates, function(memo, candidate) { return memo + candidate.delegates }, 0)) 
       - (reduce(candidatesWithMinority, function(memo, candidate) { return memo + candidate.delegates }, 0))
        >= totalDelegates) {
@@ -47,6 +53,7 @@ export function resolveDelegates(candidates, totalDelegates) {
       console.log("took one from candidates with least caucusers");
     } else {
       //Tie, resolved in UI
+      
       return candidates;
     }
   }
