@@ -3,7 +3,7 @@ import Candidate from './candidate';
 import {NavBar, Icon, List, Button} from 'antd-mobile';
 import staticData from '../iowa.json';
 import {calculateViabilityThreshold, calculateDelegates, resolveDelegates, calculateSimpleMajority} from '../calculator.js';
-import {reduce} from 'underscore';
+import {reduce, each} from 'underscore';
 
 const candidateIds = Object.keys(staticData.candidates);
 
@@ -31,9 +31,9 @@ export default class Delegates extends React.Component {
   delegatesCallback(candidateId) {
     return function(caucusers) {
       let candidates = this.state.candidates;
-      
-      const delegates = calculateDelegates(this.totalAttendees, this.totalDelegates, caucusers);
-      candidates[candidateId] = {candidateId, caucusers, delegates};
+      candidates[candidateId].caucusers = caucusers;
+      // recalculate delegates for every candidate now that there's been a change
+      each(candidates, function(candidate) { candidate.delegates = calculateDelegates(this.totalAttendees, this.totalDelegates, candidate.caucusers)}.bind(this));
 
       // Special case for situations decided by simple majority (ex one-delegate precincts)
       if (this.viabilityThreshold === 0) {
