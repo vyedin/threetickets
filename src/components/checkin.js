@@ -23,9 +23,9 @@ export default class Checkin extends React.Component {
   }
 
   handleCheckin(){
-    // this.channel.push("checkin", {
-    //   attendees: this.state.totalAttendees
-    // });
+    this.props.channel.push("checkin", {
+      attendees: this.state.totalAttendees
+    });
     window.localStorage.setItem("totalAttendees", this.state.totalAttendees);
     this.goForward({pathname: "/delegates"});
   }
