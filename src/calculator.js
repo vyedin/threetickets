@@ -32,7 +32,7 @@ export function resolveDelegates(candidates, totalDelegates) {
   // - BREAK UP SMALL GROUP: If groups have equal delegate counts, the smallest group is forced to realign and give up their delegates
   // - A TIE: Two candidates tied for a delegate? There is a coin toss (you knew $ ran our democracy but you didn't know it was quarters!).
   //   We will need to detect this state (viable candidates with same caucusers count) and offer UI to help the user report the results
-  while (reduce(candidates, function(memo, candidate) { return memo + candidate.delegates }, 0) > totalDelegates) {
+  while (sum (candidates, "delegates") > totalDelegates) {
     const candidatesWithMostDelegates = multipleComp(max, candidates, "delegates");
     const viableCandidates = filter(candidates, function(candidate){ return (candidate.delegates > 0) });
     const candidatesWithMinority = multipleComp(min, viableCandidates, "caucusers");
@@ -46,18 +46,20 @@ export function resolveDelegates(candidates, totalDelegates) {
     // caucusers is greater than or equal to the total delegates for the precinct, we can safely drop the delegates
     // from the lowest performing candidate(s). This will drop the candidate with the least caucusers, and multiples
     // if there is a tie (of 2 - n candidates)
-    } else if ((reduce(candidates, function(memo, candidate) { return memo + candidate.delegates }, 0)) 
-      - (reduce(candidatesWithMinority, function(memo, candidate) { return memo + candidate.delegates }, 0))
-       >= totalDelegates) {
+    } else if (sum (candidates, "delegates") - sum (candidatesWithMinority, "delegates") >= totalDelegates) {
       each(candidatesWithMinority, function(candidate) { candidate.delegates-- });
       console.log("took one from candidates with least caucusers");
     } else {
       //Tie, resolved in UI
-      
+
       return candidates;
     }
   }
   return candidates;
+}
+
+export function sum(obj, prop) {
+  return reduce(obj, function(memo, val) { return memo + val[prop] }, 0);
 }
 
 // Helper function that returns multiple objects (ties) from comparator (min or max) function, as array

@@ -2,8 +2,8 @@ import React from 'react';
 import Candidate from './candidate';
 import {NavBar, Icon, List, Button} from 'antd-mobile';
 import staticData from '../iowa.json';
-import {calculateViabilityThreshold, calculateDelegates, resolveDelegates, calculateSimpleMajority} from '../calculator.js';
-import {reduce, each} from 'underscore';
+import {calculateViabilityThreshold, calculateDelegates, resolveDelegates, calculateSimpleMajority, sum} from '../calculator.js';
+import {each} from 'underscore';
 
 const candidateIds = Object.keys(staticData.candidates);
 
@@ -45,18 +45,18 @@ export default class Delegates extends React.Component {
       //   the app isn't able to help too much here.
       // - TIE OR TOO MANY DELEGATES ALLOCATED: a few things can happen depending on the situation. These are outlined in `resolveDelegates` below.
       
-      if (reduce(candidates, function(memo, candidate) { return memo + candidate.delegates}, 0) > this.totalDelegates) {
+      if (sum (candidates, "delegates") > this.totalDelegates) {
         candidates = resolveDelegates(candidates, this.totalDelegates);
       }
       this.setState({
         candidates, 
-        countedCaucusers: reduce(candidates, function(memo, candidate) { return memo + candidate.caucusers}, 0),
-        pledgedDelegates: reduce(candidates, function(memo, candidate) { return memo + candidate.delegates}, 0)
+        countedCaucusers: sum (candidates, "caucusers"),
+        pledgedDelegates: sum (candidates, "delegates")
       });
     }.bind(this);
   }
 
-  goBack(){
+  goBack() {
     this.props.history.goBack();
   }
 
