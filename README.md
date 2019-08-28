@@ -1,11 +1,9 @@
-## Formats
+#Three Tickets
 
-"User ID" is actually a query string style key/value set:
+Welcome to Three Tickets, the Iowa caucus calculator. 
 
-    precinct_id=adams1&user_id=asdf1234
+`npm start` to run
 
+`npm test` to run test
 
-So the full URL we send by text is:
-
-    https://caucus.elizabethwarren.com/#precinct_id=adams1&user_id=asdf1234
-
+ 

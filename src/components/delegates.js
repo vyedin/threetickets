@@ -33,7 +33,7 @@ export default class Delegates extends React.Component {
       let candidates = this.state.candidates;
       candidates[candidateId].caucusers = caucusers;
       // recalculate delegates for every candidate now that there's been a change
-      each(candidates, function(candidate) { candidate.delegates = calculateDelegates(this.totalAttendees, this.totalDelegates, candidate.caucusers)}.bind(this));
+      each(candidates, function(candidate) { candidate.delegates = calculateDelegates(this.totalAttendees, this.totalDelegates, candidate.caucusers) }.bind(this));
 
       // Special case for situations decided by simple majority (ex one-delegate precincts)
       if (this.viabilityThreshold === 0) {
@@ -45,13 +45,13 @@ export default class Delegates extends React.Component {
       //   the app isn't able to help too much here.
       // - TIE OR TOO MANY DELEGATES ALLOCATED: a few things can happen depending on the situation. These are outlined in `resolveDelegates` below.
       
-      if (sum (candidates, "delegates") > this.totalDelegates) {
+      if (sum(candidates, "delegates") > this.totalDelegates) {
         candidates = resolveDelegates(candidates, this.totalDelegates);
       }
       this.setState({
         candidates, 
-        countedCaucusers: sum (candidates, "caucusers"),
-        pledgedDelegates: sum (candidates, "delegates")
+        countedCaucusers: sum(candidates, "caucusers"),
+        pledgedDelegates: sum(candidates, "delegates")
       });
     }.bind(this);
   }

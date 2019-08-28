@@ -15,13 +15,14 @@ export function calculateViabilityThreshold(totalAttendees,totalDelegates) {
 }
 
 export function calculateDelegates(totalAttendees, totalDelegates, caucusers) {
-  return Math.round((caucusers * totalDelegates)/totalAttendees);
+  const viabilityThreshold = calculateViabilityThreshold(totalAttendees, totalDelegates);
+  return (caucusers >= viabilityThreshold) ? Math.round((caucusers * totalDelegates)/totalAttendees): 0;
 }
 
 // Modify the candidates object according to the special case rules
 export function calculateSimpleMajority(candidates, totalDelegates) {
   const candidatesWithMajority = multipleComp(max, candidates, "caucusers");
-  each(candidatesWithMajority, function(candidate) { candidate.delegates = totalDelegates }); //If it's a tie, we want to set both
+  each(candidatesWithMajority, (candidate) => candidate.delegates = totalDelegates); //If it's a tie, we want to set both
   // We'll take care of ties and resetting the smaller groups to 0 delegates in resolveDelegates
   return candidates;
 }
