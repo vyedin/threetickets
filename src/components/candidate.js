@@ -5,7 +5,7 @@ export default class Candidate extends React.Component {
 
 	constructor(props) {
 		super(props);
-    this.name = this.props.name;
+    this.name = this.props.name
 	}
 
 	onChange = (caucusers) => {

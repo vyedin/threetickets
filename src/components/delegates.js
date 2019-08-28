@@ -13,7 +13,7 @@ export default class Delegates extends React.Component {
     super(props);
     const candidates = {};
     candidateIds.forEach((candidateId) => {
-      candidates[candidateId] = {candidateId, caucusers: 0, delegates: 0};
+      candidates[candidateId] = {candidateId, caucusers: 0, delegates: 0, tie:[]};
     });
     this.state = {
       candidates,

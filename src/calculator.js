@@ -1,5 +1,5 @@
 //CALCULATOR.JS LIBRARY
-import {max, min, filter, each, reduce, isEqual} from 'underscore';
+import {max, min, filter, each, reduce, map, chain, extend} from 'underscore';
 
 export function calculateViabilityThreshold(totalAttendees,totalDelegates) {
   switch(totalDelegates) {
@@ -18,6 +18,7 @@ export function calculateDelegates(totalAttendees, totalDelegates, caucusers) {
   return Math.round((caucusers * totalDelegates)/totalAttendees);
 }
 
+// Modify the candidates object according to the special case rules
 export function calculateSimpleMajority(candidates, totalDelegates) {
   const candidatesWithMajority = multipleComp(max, candidates, "caucusers");
   each(candidatesWithMajority, function(candidate) { candidate.delegates = totalDelegates }); //If it's a tie, we want to set both
@@ -25,6 +26,7 @@ export function calculateSimpleMajority(candidates, totalDelegates) {
   return candidates;
 }
 
+// Modify the candidates object according to the special case rules
 export function resolveDelegates(candidates, totalDelegates) {
   // Ok, you got here because you allocated too many delegates. At this point, somebody has to lose a delegate. This can happen in a few ways:
   // - TAKE ONE OFF THE TOP: Technically the smallest group can't lose its only delegate, 
@@ -34,7 +36,7 @@ export function resolveDelegates(candidates, totalDelegates) {
   //   We will need to detect this state (viable candidates with same caucusers count) and offer UI to help the user report the results
   while (sum (candidates, "delegates") > totalDelegates) {
     const candidatesWithMostDelegates = multipleComp(max, candidates, "delegates");
-    const viableCandidates = filter(candidates, function(candidate){ return (candidate.delegates > 0) });
+    const viableCandidates = filter(candidates, (candidate) => candidate.delegates > 0);
     const candidatesWithMinority = multipleComp(min, viableCandidates, "caucusers");
 
     // As long as the top group is not losing its only delegate, we can remove one
@@ -47,11 +49,18 @@ export function resolveDelegates(candidates, totalDelegates) {
     // from the lowest performing candidate(s). This will drop the candidate with the least caucusers, and multiples
     // if there is a tie (of 2 - n candidates)
     } else if (sum (candidates, "delegates") - sum (candidatesWithMinority, "delegates") >= totalDelegates) {
-      each(candidatesWithMinority, function(candidate) { candidate.delegates-- });
+      each(candidatesWithMinority, (candidate) => candidate.delegates-- );
       console.log("took one from candidates with least caucusers");
     } else {
       //Tie, resolved in UI
-
+      chain(viableCandidates)
+      each(viableCandidates, function(candidate) {
+        candidate.tie = chain(viableCandidates)
+          .filter((newCandidate) => newCandidate.caucusers === candidate.caucusers)
+          .map((candidate) => candidate.candidateId)
+          .value();
+      });
+      console.log(candidates);
       return candidates;
     }
   }
