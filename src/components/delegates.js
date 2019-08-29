@@ -69,7 +69,7 @@ export default class Delegates extends React.Component {
   }
 
   render () {
-	  return (
+    return (
       <div>
         <NavBar
           mode="light"
@@ -97,6 +97,6 @@ export default class Delegates extends React.Component {
         <Button type="primary" onClick={() => this.submitAlignment()}>Submit Alignment</Button>
         <Button type="default" onClick={() => this.goForward("/help")}>Get Help</Button>
       </div>
-	  )
-	}
+    )
+  }
 }
