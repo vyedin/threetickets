@@ -13,7 +13,7 @@ export default class Checkin extends React.Component {
   onChange = (totalAttendees) => {
     this.setState({totalAttendees});
   }
-  
+
   goBack(){
     this.props.history.goBack();
   }
@@ -29,7 +29,7 @@ export default class Checkin extends React.Component {
     window.localStorage.setItem("totalAttendees", this.state.totalAttendees);
     this.goForward({pathname: "/delegates"});
   }
-  
+
   render () {
     return (
       <div>

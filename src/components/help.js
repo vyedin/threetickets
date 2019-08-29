@@ -6,21 +6,21 @@ const Item = List.Item;
 
 export default class Help extends React.Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props);
-	  this.state = {};
+    this.state = {};
   }
 
   goBack(){
     this.props.history.goBack();
   }
-  
+
   goForward(path) {
     this.props.history.push(path);
   }
 
-	render () {
-	  return (
+  render () {
+    return (
       <div>
         <NavBar
           mode="light"
@@ -42,6 +42,6 @@ export default class Help extends React.Component {
         </List>
         <Button type="primary" href="tel:+1-408-832-3962">Call for Help</Button>
       </div>
-	  )
-	}
+    )
+  }
 }

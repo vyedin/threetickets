@@ -4,7 +4,7 @@ import {NavBar, Button, Icon,TextareaItem} from 'antd-mobile';
 //TODO: This should probably be the same component as Help
 export default class Message extends React.Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.problem = this.props.location.state.problem;
   }
@@ -17,8 +17,8 @@ export default class Message extends React.Component {
     this.props.history.push(path);
   }
 
-	render () {
-	  return (
+  render () {
+    return (
       <div>
         <NavBar
           mode="light"
@@ -33,6 +33,6 @@ export default class Message extends React.Component {
         />
         <Button type="primary" onClick={() => this.goForward("/help")}>Send Message</Button>
       </div>
-	  )
-	}
+    )
+  }
 }

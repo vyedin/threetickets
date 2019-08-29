@@ -4,7 +4,7 @@ import staticData from '../iowa.json';
 
 export default class Welcome extends React.Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
      code: null,
@@ -25,15 +25,15 @@ export default class Welcome extends React.Component {
       this.setState({error: true});
     }
   }
-  
+
   goForward(path) {
     this.props.history.push(path);
   }
-  
+
   // Few notes here: we'll have the date, time, and exact location in the json file when it's ready. The following is placeholder.
   // Right now this just takes a precinct id (see iowa.json for some precincts). We may decide it also needs to identify the users.
   // There's surely a better way to do this than two returns but this gets the idea across
-	render () {
+  render () {
     if(window.localStorage.getItem("precinct")) {
       const precinct = parseInt(window.localStorage.getItem("precinct"));
       return (

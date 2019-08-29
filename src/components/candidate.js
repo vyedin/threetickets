@@ -3,17 +3,17 @@ import {InputItem} from 'antd-mobile';
 
 export default class Candidate extends React.Component {
 
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
     this.name = this.props.name
-	}
+  }
 
-	onChange = (caucusers) => {
+  onChange = (caucusers) => {
     this.props.delegatesCallback(parseInt(caucusers) || 0);
   }
 
-	render () {
-	  return (
+  render () {
+    return (
       <div>
         <InputItem
           type="digit"
@@ -23,6 +23,6 @@ export default class Candidate extends React.Component {
           onChange={this.onChange}
         >{this.name}</InputItem>
       </div>
-	  )
-	}
+    )
+  }
 }

@@ -9,7 +9,7 @@ const candidateIds = Object.keys(staticData.candidates);
 
 export default class Delegates extends React.Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props);
     const candidates = {};
     candidateIds.forEach((candidateId) => {
